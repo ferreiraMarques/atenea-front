@@ -20,9 +20,6 @@ export class AuthGuard implements CanActivate, CanLoad {
     if (!respuesta) {
       this.router.navigate(['/'])
     }
-    if (respuesta) {
-      this.router.navigate(['/panel/inicio'])
-    }
     return true;
   }
   canLoad(
@@ -32,9 +29,6 @@ export class AuthGuard implements CanActivate, CanLoad {
     const response = this.authService.verificaAutenticacion()
     if (!response) {
       this.router.navigate(['/'])
-    }
-    if (response) {
-      this.router.navigate(['/panel/inicio'])
     }
     return true;
   }

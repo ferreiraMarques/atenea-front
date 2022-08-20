@@ -17,8 +17,8 @@ export class RegisterFormComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
   constructor(private authService: AuthService) { }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {this.authService.verifySession()}
+
   onSubmit(): void {
     const { username, email, password } = this.form;
     this.authService.register(username, email, password).subscribe({

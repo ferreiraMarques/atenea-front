@@ -7,13 +7,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item" *ngIf="!this.isLoggedIn">
-            <a class="nav-link active" aria-current="page" href="/">ingresar</a>
+            <a class="nav-link active" aria-current="page" href="auth/login">ingresar</a>
           </li>
           <li class="nav-item" *ngIf="!this.isLoggedIn">
-            <a class="nav-link active" aria-current="page" href="registro">registrar</a>
+            <a class="nav-link active" aria-current="page" href="auth/registro">registrar</a>
           </li>
           <li class="nav-item" *ngIf="this.isLoggedIn === true">
-            <a class="nav-link" routerLinkActive="btn-success">Perfil</a>
+            <a class="nav-link" href="panel/perfil" routerLinkActive="btn-success">Perfil</a>
           </li>
           <li class="nav-item" *ngIf="showAdmin === true">
             <a class="nav-link" href="#">Administrar</a>

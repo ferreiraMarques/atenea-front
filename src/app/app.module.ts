@@ -5,8 +5,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { httpInterceptorProviders } from './core/services/http-interceptor/http.interceptor';
+//import { httpInterceptorProviders } from './core/services/http-interceptor/http.interceptor';
 import { SharedModule } from './shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,9 +18,10 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule
   ],
-  providers: [httpInterceptorProviders],
+  providers: [/*httpInterceptorProviders*/],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

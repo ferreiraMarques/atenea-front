@@ -5,18 +5,12 @@ import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   {
-    path: 'inicio',
-    component: HomeComponent,
-    children: [
-      {
-        path: 'perfil',
-        component: ProfileComponent
-      },
-      {
-        path: '**',
-        component: ProfileComponent
-      }
-    ]
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: "perfil",
+    component: ProfileComponent
   }
 ];
 
@@ -24,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DashboardUserRoutingModule { }
+export class DashboardRoutingModule { }

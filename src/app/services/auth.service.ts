@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { LocalStorageService } from '../core/services/local-storage/local-storage.service';
-const AUTH_API: any = environment.baseApiAuth;
+import { SessionStorageService } from '../core/services/session-storage/session-storage.service';
+
 const httpOptions = {
   headers: new HttpHeaders({ 
     'Content-Type': 'application/json',
@@ -20,27 +21,36 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthService {
+  private AUTH_API: any = environment.baseApiAuth;
+  private SESSION_KEY:any = environment.sessionToken;
   constructor(private http: HttpClient,
-    private localStorage: LocalStorageService) {}
+    private sessionStorage: SessionStorageService,
+    private router: Router) {}
 
   login(username: string, password:string): Observable<any>{
     const data = {username, password};
-    return this.http.post(`${AUTH_API}signin`, data, httpOptions);
+    return this.http.post(`${this.AUTH_API}signin`, data, httpOptions);
   }
 
   register(username: string, email:string, password:string): Observable<any>{
     const data = {username, email, password};
-    return this.http.post(`${AUTH_API}signup`, data, httpOptions);
+    return this.http.post(`${this.AUTH_API}signup`, data, httpOptions);
   }
 
   logout(): Observable<any>{
-    return this.http.post(`${AUTH_API}/signout`, {}, httpOptions);
+    return this.http.post(`${this.AUTH_API}/signout`, {}, httpOptions);
   }
 
   verificaAutenticacion() {
-    if (!this.localStorage.isLogged) {
+    if (!this.sessionStorage.getJsonValue(this.SESSION_KEY)) {
       return false;
     }
     return true;
+  }
+
+  verifySession(){
+    if(this.verificaAutenticacion()){
+      this.router.navigate(['/panel']);
+    }
   }
 }
