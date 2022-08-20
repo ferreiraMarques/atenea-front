@@ -9,6 +9,9 @@ import { QuizComponent } from './pages/quiz/quiz.component';
 import { AdministrationComponent } from './pages/administration/administration.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CoursesManagerComponent } from './components/courses-manager/courses-manager.component';
+import { ShowUserPanelComponent } from './components/show-user-panel/show-user-panel.component';
+import { ProfileManagerComponent } from './components/profile-manager/profile-manager.component';
+import { LearningComponent } from './pages/learning/learning.component';
 
 
 @NgModule({
@@ -18,7 +21,10 @@ import { CoursesManagerComponent } from './components/courses-manager/courses-ma
     DashboardComponent,
     QuizComponent,
     AdministrationComponent,
-    CoursesManagerComponent
+    CoursesManagerComponent,
+    ShowUserPanelComponent,
+    ProfileManagerComponent,
+    LearningComponent
   ],
   imports: [
     CommonModule,

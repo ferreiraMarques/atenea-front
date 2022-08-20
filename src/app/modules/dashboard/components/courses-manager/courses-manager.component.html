@@ -41,22 +41,21 @@
 </section>
 
 <ng-template #created>
-    <mat-form-field appearance="legacy">
-        <mat-label>Legacy form field</mat-label>
-        <input matInput placeholder="Placeholder">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>Hint</mat-hint>
-      </mat-form-field>
+    
 
     <mat-card class="card-container mat-elevation-z8 mt-5">
-        <mat-card-title>Shiba Inu</mat-card-title>
-        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        <mat-card-subtitle>Ingrese el nombre:</mat-card-subtitle>
         <mat-card-content>
-            
+                <mat-form-field appearance="fill">
+                    <input matInput placeholder="Ingrese una materia"
+                        formControlName="nameFormControl" required>
+                </mat-form-field>
+                <mat-error *ngIf="invalidData('nameFormControl')">
+                    {{ErrorDate}}
+                </mat-error>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
+          <button mat-button (click)="addCourse()">Crear</button>
         </mat-card-actions>
       </mat-card>
 </ng-template>

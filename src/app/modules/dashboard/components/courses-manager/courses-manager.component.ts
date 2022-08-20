@@ -45,31 +45,35 @@ export class CoursesManagerComponent implements OnInit {
     private categoria: CategoryService,
     private question: QuestionService) { 
       this.courseRegistratiomForm = this.fb.group({
-        nameFormControl: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(80), Validators.pattern(/^[a-zA-ZñÑ ]*$/)]],
-      })
+        nameFormControl: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(80)]],
+      });
     }
 
-    // get courseName() {
-    //   return this.courseRegistratiomForm.get('nameFormControl');
-    // }
+    getCourseName() {
+      return this.courseRegistratiomForm.get('nameFormControl');
+    }
 
-    // invalidData(campo: string) {
-    //   return this.courseRegistratiomForm.controls[campo].errors && this.courseRegistratiomForm.controls[campo].touched;
-    // }
+    invalidData(campo: string) {
+      return this.courseRegistratiomForm.controls[campo].errors && this.courseRegistratiomForm.controls[campo].touched;
+    }
 
-    // get ErrorDate(): string {
-    //   const courseName = this.courseRegistratiomForm.get('nameFormControl')?.errors;
+    get ErrorDate(): string {
+      const courseName = this.courseRegistratiomForm.get('nameFormControl')?.errors;
   
-    //   if (courseName?.['required']) {
-    //     return "Debe ingresar un nombre";
-    //   } else if (this.courseName?.hasError('minlength')) {
-    //     return "Mínimo 2 caracteres";
-    //   } else if (courseName?.['pattern']) {
-    //     return "No se permiten caracteres especiales";
-    //   }
+       if (courseName?.['required']) {
+         return "Debe ingresar un nombre";
+       } else if (this.getCourseName()?.hasError('minlength')) {
+         return "Mínimo 2 caracteres";
+       } else if (courseName?.['pattern']) {
+         return "No se permiten caracteres especiales";
+       }
   
-    //   return '';
-    // }
+       return '';
+    }
+
+    addCourse(){
+      alert("Hola" + this.getCourseName()?.value);
+    }
 
   ngOnInit(): void {
     // console.log(this.auth);
