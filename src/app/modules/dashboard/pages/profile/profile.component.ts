@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalStorageService } from 'src/app/core/services/local-storage/local-storage.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { QuestionService } from 'src/app/services/question.service';
 
@@ -10,12 +9,10 @@ import { QuestionService } from 'src/app/services/question.service';
 })
 export class ProfileComponent implements OnInit {
   constructor(
-    private storage: LocalStorageService,
     private categoria: CategoryService,
     private question: QuestionService) { }
 
   ngOnInit(): void {
-    console.log(this.storage.getUser());
 
     this.categoria.showCategory()
       .subscribe(resp => {

@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules/dashboard/dashboard.module').then( m => m.DashboardModule),
     canLoad: [AuthGuard],
     canActivate: [AuthGuard]
-  }
+  },
   // {
   //   path: '404',
   //   component: ErrorPageComponent
@@ -20,7 +20,7 @@ const routes: Routes = [
   // {
   //   path: '**',
   //   // component: ErrorPageComponent
-  //   redirectTo: '404'
+  //   redirectTo: ''
   // }
 ];
 

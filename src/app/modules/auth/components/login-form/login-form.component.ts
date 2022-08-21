@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SessionStorageService } from 'src/app/core/services/session-storage/session-storage.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { AccountDTO } from 'src/app/services/models/accountDto';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -11,22 +13,27 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginFormComponent implements OnInit {
 
-  form: any = {
-    username: null,
-    password: null
-  };
+  username: string = '';
+  password: string = '';
+  show: boolean = false;
   private SESSION_TOKEN = environment
   errorMessage:string = "";
-  isLoggedIn:boolean = false;
+  hidePassword = true;
+  loginData: AccountDTO = { Usuario: '', Password: '' };
+
+  pwdFormControl = new FormControl('', [Validators.required]);
+  usrFormControl = new FormControl('', [Validators.required]);
   constructor(private authService: AuthService, 
     private sesionStorage: SessionStorageService,
     private router: Router) { }
 
   ngOnInit(): void {this.authService.verifySession();}
 
-  onSubmit(): void {
-    console.log(this.authService.verificaAutenticacion());
-    const { username, password } = this.form;
+  loginUser(): void {
+    if (!this.usrFormControl.valid || !this.pwdFormControl.valid) return;
+    const obj = { username: this.usrFormControl?.value, 
+                  password: this.pwdFormControl?.value 
+                };
     const session = {
       logged: true,
       username: '',
@@ -35,7 +42,7 @@ export class LoginFormComponent implements OnInit {
       userID: '',
       roles: []
     }
-    this.authService.login(username, password).subscribe({
+    this.authService.login(obj).subscribe({
       next: data => {
         console.log(data);
         console.log(data.roles)
@@ -53,4 +60,17 @@ export class LoginFormComponent implements OnInit {
       }
     });
   }
+
+
+  submit() {
+    console.log('user name is ' + this.username);
+    this.clear();
+  }
+  clear() {
+    this.username = '';
+    this.password = '';
+    this.show = true;
+  }
 }
+
+

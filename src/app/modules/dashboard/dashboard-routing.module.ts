@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ActitudesComponent } from './pages/actitudes/actitudes.component';
+import { CoursesComponent } from './pages/courses/courses.component';
 import { HomeComponent } from './pages/home/home.component';
+import { LearningComponent } from './pages/learning/learning.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
@@ -11,6 +14,18 @@ const routes: Routes = [
   {
     path: "perfil",
     component: ProfileComponent
+  },
+  {
+    path: "quiz/:id",
+    component: LearningComponent
+  },
+  {
+    path: "cursos",
+    component: CoursesComponent
+  },
+  {
+    path: "actitudes",
+    component: ActitudesComponent
   }
 ];
 

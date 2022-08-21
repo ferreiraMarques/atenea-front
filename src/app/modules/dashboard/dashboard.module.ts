@@ -12,6 +12,10 @@ import { CoursesManagerComponent } from './components/courses-manager/courses-ma
 import { ShowUserPanelComponent } from './components/show-user-panel/show-user-panel.component';
 import { ProfileManagerComponent } from './components/profile-manager/profile-manager.component';
 import { LearningComponent } from './pages/learning/learning.component';
+import { ShowCoursesComponent } from './components/show-courses/show-courses.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CoursesComponent } from './pages/courses/courses.component';
+import { ActitudesComponent } from './pages/actitudes/actitudes.component';
 
 
 @NgModule({
@@ -24,12 +28,17 @@ import { LearningComponent } from './pages/learning/learning.component';
     CoursesManagerComponent,
     ShowUserPanelComponent,
     ProfileManagerComponent,
-    LearningComponent
+    LearningComponent,
+    ShowCoursesComponent,
+    CoursesComponent,
+    ActitudesComponent
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class DashboardModule { }
