@@ -7,12 +7,14 @@ import { QuizService } from 'src/app/services/quiz.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-profile-manager',
-  templateUrl: './profile-manager.component.html',
-  styleUrls: ['./profile-manager.component.scss']
+  selector: 'app-show-main',
+  templateUrl: './show-main.component.html',
+  styleUrls: ['./show-main.component.scss']
 })
-export class ProfileManagerComponent implements OnInit {
+export class ShowMainComponent implements OnInit {
+
   SESSION_TOKEN:any = environment.sessionToken;
+  API_URL:any =environment.baseUri;
   dataListProfile!: any;
   quizData!:any;
   constructor(private sessionStorage: SessionStorageService,
@@ -35,9 +37,11 @@ export class ProfileManagerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.profile.validateProfile(this.auth.userID)
     this.profile.showProfile(this.auth.userID)
       .subscribe((resp:any) => {
         this.dataListProfile = resp;
+        //console.log(resp);
       });
 
     this.quiz.showQuiz()
@@ -54,6 +58,5 @@ export class ProfileManagerComponent implements OnInit {
       })
 
   }
-
 
 }

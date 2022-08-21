@@ -16,6 +16,7 @@ import { ShowCoursesComponent } from './components/show-courses/show-courses.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoursesComponent } from './pages/courses/courses.component';
 import { ActitudesComponent } from './pages/actitudes/actitudes.component';
+import { ShowMainComponent } from './components/show-main/show-main.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ActitudesComponent } from './pages/actitudes/actitudes.component';
     LearningComponent,
     ShowCoursesComponent,
     CoursesComponent,
-    ActitudesComponent
+    ActitudesComponent,
+    ShowMainComponent
   ],
   imports: [
     CommonModule,

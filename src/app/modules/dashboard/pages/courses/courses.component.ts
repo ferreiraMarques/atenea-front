@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { SessionStorageService } from 'src/app/core/services/session-storage/session-storage.service';
 import { CourseService } from 'src/app/services/course.service';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -16,14 +18,88 @@ export class CoursesComponent implements OnInit {
   dataListProfile!: any;
   questionsList!: any;
   listCategory!:any;
+  checkList:any;
   courseData!:any;
+  form: FormGroup;
+  skillsAvaible = [
+    {
+      title: 'Lenguaje Python',
+      name: 'python',
+      img: '/assets/python.svg',
+    },
+    {
+      title: 'HTML',
+      name: 'html',
+      img: '/assets/html.png',
+    },
+    {
+      title: 'CSS',
+      name: 'css',
+      img: '/assets/css.png',
+    },
+    {
+      title: 'Lenguaje java',
+      name: 'java',
+      img: '/assets/java.svg',
+    },
+    {
+      title: 'CSS',
+      name: 'css',
+      img: '/assets/css.png',
+    },
+    {
+      title: 'Lenguaje java',
+      name: 'java',
+      img: '/assets/java.svg',
+    },
+  ];
   constructor(private sessionStorage: SessionStorageService,
     private profile: ProfileService,
+    private formBuilder: FormBuilder,
     private course: CourseService,
-    private quiz: QuizService) { }
+    private router: Router,
+    private quiz: QuizService) {
+      this.form = this.formBuilder.group({
+        selectedSkills: new FormArray([]),
+      });
+     }
+
+     
+
 
   get auth(){
     return this.sessionStorage.getJsonValue(this.SESSION_TOKEN)
+  }
+
+  onCheckboxChange(event: any) {
+    console.log('change');
+    const selectedSkills = this.form.controls['selectedSkills'] as FormArray;
+    if (event.target.checked) {
+      selectedSkills.push(new FormControl(event.target.value));
+    } else {
+      const index = selectedSkills.controls.findIndex(
+        (x) => x.value === event.target.value
+      );
+      selectedSkills.removeAt(index);
+    }
+  }
+
+  submit() {
+    const resp:any = [];
+    resp.push(this.form.value);
+    let data = resp[0].selectedSkills;
+    data.map((res:any) => {
+      let separados = res.split(',');
+      console.log(separados[0], separados[1])
+      this.quiz.addQuiz(this.auth.userID, separados[1], separados[0])
+          .subscribe(resp => {
+            if(resp){
+              this.router.navigate(['panel']);
+            }
+          })
+    })
+
+    //this.router.navigate(['skills/test-skill']);
   }
 
   routerRedirect(value: number) {
@@ -52,6 +128,7 @@ export class CoursesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.checkList);
     this.profile.showProfile(this.auth.userID)
       .subscribe((resp:any) => {
         this.dataListProfile = resp;
