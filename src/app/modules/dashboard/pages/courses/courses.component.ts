@@ -21,38 +21,9 @@ export class CoursesComponent implements OnInit {
   checkList:any;
   courseData!:any;
   form: FormGroup;
-  skillsAvaible = [
-    {
-      title: 'Lenguaje Python',
-      name: 'python',
-      img: '/assets/python.svg',
-    },
-    {
-      title: 'HTML',
-      name: 'html',
-      img: '/assets/html.png',
-    },
-    {
-      title: 'CSS',
-      name: 'css',
-      img: '/assets/css.png',
-    },
-    {
-      title: 'Lenguaje java',
-      name: 'java',
-      img: '/assets/java.svg',
-    },
-    {
-      title: 'CSS',
-      name: 'css',
-      img: '/assets/css.png',
-    },
-    {
-      title: 'Lenguaje java',
-      name: 'java',
-      img: '/assets/java.svg',
-    },
-  ];
+  get auth(){
+    return this.sessionStorage.getJsonValue(this.SESSION_TOKEN)
+  }
   constructor(private sessionStorage: SessionStorageService,
     private profile: ProfileService,
     private formBuilder: FormBuilder,
@@ -63,13 +34,6 @@ export class CoursesComponent implements OnInit {
         selectedSkills: new FormArray([]),
       });
      }
-
-     
-
-
-  get auth(){
-    return this.sessionStorage.getJsonValue(this.SESSION_TOKEN)
-  }
 
   onCheckboxChange(event: any) {
     console.log('change');
@@ -106,29 +70,29 @@ export class CoursesComponent implements OnInit {
     return ['quiz', value];
   }
 
-  addCourse(id:number, name:string){
-    Swal.fire({
-      title: 'Desea agregar este curso?',
-      icon: 'success',
-      showCancelButton: true,
-      confirmButtonColor: 'rgba(90, 55, 180, 0.7);',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const res:any ={
-          "name": name
-        }
-        this.quiz.addQuiz(this.auth.userID, id, res)
-          .subscribe(resp => {
-            console.log(resp);
-          })
-      }
-    })
-  }
+  // addCourse(id:number, name:string){
+  //   Swal.fire({
+  //     title: 'Desea agregar este curso?',
+  //     icon: 'success',
+  //     showCancelButton: true,
+  //     confirmButtonColor: 'rgba(90, 55, 180, 0.7);',
+  //     cancelButtonColor: '#d33',
+  //     confirmButtonText: 'Yes, delete it!'
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       const res:any ={
+  //         "name": name
+  //       }
+  //       this.quiz.addQuiz(this.auth.userID, id, res)
+  //         .subscribe(resp => {
+  //           console.log(resp);
+  //         })
+  //     }
+  //   })
+  // }
 
   ngOnInit(): void {
-    console.log(this.checkList);
+    this.profile.validateProfile(this.auth.userID);
     this.profile.showProfile(this.auth.userID)
       .subscribe((resp:any) => {
         this.dataListProfile = resp;

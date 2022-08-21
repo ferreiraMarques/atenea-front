@@ -37,7 +37,6 @@ export class ShowUserPanelComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.categoryId);
     this.profile.showProfile(this.auth.userID)
       .subscribe((resp:any) => {
         this.dataListProfile = resp;
@@ -53,7 +52,6 @@ export class ShowUserPanelComponent implements OnInit {
       .subscribe((resp:any) => {
         const response:any = [];
         resp.map((res:any) => {
-          //console.log(res.courses)
           if(res.courses.id === this.categoryId){
             response.push(res);
           }

@@ -28,10 +28,10 @@ const routes: Routes = [
     path: "cursos",
     component: CoursesComponent
   },
-  {
-    path: "actitudes",
-    component: ActitudesComponent
-  }
+  // {
+  //   path: "actitudes",
+  //   component: ActitudesComponent
+  // }
 ];
 
 @NgModule({
