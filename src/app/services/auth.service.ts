@@ -5,18 +5,18 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { SessionStorageService } from '../core/services/session-storage/session-storage.service';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
-  })
+// const httpOptions = {
+//   headers: new HttpHeaders({ 
+//     'Content-Type': 'application/json',
+//     'Access-Control-Allow-Origin': '*'
+//   })
   // .set('Accept', 'application/json')
   //   .set('Content-Type', 'application/json')
   //   .set('Access-Control-Allow-Origin', '*')
   //   .set('X-IBM-Client-Id', '81188330-c768-46fe-a378-ff3ac9e88824')
   //   .set('Access-Control-Allow-Credentials', 'true')
   //   .set("Access-Control-Allow-Methods","GET,HEAD,OPTIONS,POST,PUT")
-};
+//};
 @Injectable({
   providedIn: 'root'
 })
@@ -27,18 +27,16 @@ export class AuthService {
     private sessionStorage: SessionStorageService,
     private router: Router) {}
 
-  login(username: string, password:string): Observable<any>{
-    const data = {username, password};
-    return this.http.post(`${this.AUTH_API}signin`, data, httpOptions);
+  login(obj:any): Observable<any>{
+    return this.http.post(`${this.AUTH_API}signin`, obj, /*httpOptions*/);
   }
 
-  register(username: string, email:string, password:string): Observable<any>{
-    const data = {username, email, password};
-    return this.http.post(`${this.AUTH_API}signup`, data, httpOptions);
+  register(obj:any): Observable<any>{
+    return this.http.post(`${this.AUTH_API}signup`, obj, /*httpOptions*/);
   }
 
   logout(): Observable<any>{
-    return this.http.post(`${this.AUTH_API}/signout`, {}, httpOptions);
+    return this.http.post(`${this.AUTH_API}/signout`, {}, /*httpOptions*/);
   }
 
   verificaAutenticacion() {

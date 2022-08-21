@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalVariablesService } from 'src/app/core/services/global-variables/global-variables.service';
 import { SessionStorageService } from 'src/app/core/services/session-storage/session-storage.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { CourseService } from 'src/app/services/course.service';
 import { ProfileService } from 'src/app/services/profile.service';
-import { QuestionService } from 'src/app/services/question.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -21,20 +21,28 @@ export class ShowUserPanelComponent implements OnInit {
     private profile: ProfileService,
     private category: CategoryService,
     private course: CourseService,
-    private question: QuestionService) { }
+    private global: GlobalVariablesService) { }
 
   get auth(){
     return this.sessionStorage.getJsonValue(this.SESSION_TOKEN)
+  }
+
+  get categoryId(){
+    const data = this.global.getShowCategory();
+    return data._value;
+  }
+
+  routerRedirect(value: number) {
+    return ['quiz', value];
   }
 
   ngOnInit(): void {
     this.profile.showProfile(this.auth.userID)
       .subscribe((resp:any) => {
         this.dataListProfile = resp;
-        //console.log(resp);
       });
 
-    this.course.showCourseById(1)
+    this.course.showCourseById(this.categoryId)
       .subscribe(resp => {
         console.log(resp);
         this.courseData = resp;
@@ -44,8 +52,7 @@ export class ShowUserPanelComponent implements OnInit {
       .subscribe((resp:any) => {
         const response:any = [];
         resp.map((res:any) => {
-          //console.log(res.courses)
-          if(res.courses.id === 1){
+          if(res.courses.id === this.categoryId){
             response.push(res);
           }
         });

@@ -30,16 +30,19 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
     ErrorPageComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
+    FooterComponent,
     HeaderComponent,
     MatFormFieldModule,
     MatInputModule,
