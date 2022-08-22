@@ -1,6 +1,8 @@
 export const environment = {
   production: true,
-  baseApi: 'http://localhost:8080/api',
-  baseApiAuth: 'http://localhost:8080/api/auth/',
-  keyUsers: 'fwer345g34fk4jh5k34h34jgf4hjfdj345'
+  baseUri: 'https://hackaton-atenea-backend.herokuapp.com/',
+  baseApi: 'https://hackaton-atenea-backend.herokuapp.com/api/auth/',
+  baseApiAuth: 'https://hackaton-atenea-backend.herokuapp.com/api/auth/',
+  keyUsers: 'fwer345g34fk4jh5k34h34jgf4hjfdj345',
+  sessionToken: 'fwefwefwefwewewefrg3454k34k5gger'
 };
